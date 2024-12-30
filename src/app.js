@@ -1,33 +1,23 @@
-const { NODE_ENV = "development" } = process.env;
 const express = require("express");
+const cors = require("cors");
+
+const errorHandler = require("./errors/errorHandler");
+const notFound = require("./errors/notFound");
+const ordersRouter = require("./orders/orders.router");
+const dishesRouter = require("./dishes/dishes.router");
+
 const app = express();
 
-// Route functions
-const sayWelcome = (req, res) => {
-  const phrase = "Welcome to the server";
-  const name = req.query.name;
-  const content = name ? `${phrase}, ${name}!` : `${phrase}!`;
-  res.send(content);
-};
+// You have not learned about CORS yet.
+// The following line let's this API be used by any website.
+app.use(cors());
+app.use(express.json());
 
-const sayGoodbye = (req, res) => {
-  const phrase = "We're sorry to see you go";
-  const name = req.query.name;
-  const content = name ? `${phrase}, ${name}!` : `${phrase}!`;
-  res.send(content);
-};
+app.use("/dishes", dishesRouter);
+app.use("/orders", ordersRouter);
 
-const saySomething = (req, res) => {
-  const name = req.params.name;
+app.use(notFound);
 
-  const content =  name ? `Hello, ${name}!` : `Hello!`;
-  res.send(content);
-};
-
-// Routes
-app.get("/say/goodbye", sayGoodbye);
-app.get("/say/welcome", sayWelcome);
-app.get("/say/Hello", saySomething);
-
+app.use(errorHandler);
 
 module.exports = app;
