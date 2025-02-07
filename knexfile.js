@@ -1,6 +1,6 @@
-if (process.env.USER) require("dotenv").config();
-
 const path = require("path");
+
+require("dotenv").config();
 
 const {
   DATABASE_URL = "postgresql://postgres@localhost/postgres",
@@ -17,6 +17,9 @@ module.exports = {
     seeds: {
       directory: path.join(__dirname, "src", "db", "seeds"),
     },
+    ssl: {
+      rejectUnauthorized: false // This will allow connections without requiring SSL certificates to be valid.
+    }
   },
 
   production: {
@@ -29,11 +32,16 @@ module.exports = {
     seeds: {
       directory: path.join(__dirname, "src", "db", "seeds"),
     },
+    ssl: {
+      rejectUnauthorized: false // This will allow connections without requiring SSL certificates to be valid.
+    }
   },
 
   test: {
-    client: "postgresql",
-    connection: DATABASE_URL,
+    client: "sqlite3",
+    connection: {
+      filename: ":memory:",
+    },
     migrations: {
       directory: path.join(__dirname, "src", "db", "migrations"),
     },

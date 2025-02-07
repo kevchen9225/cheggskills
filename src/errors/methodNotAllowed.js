@@ -1,10 +1,7 @@
-/**
- * Express Router "Method not allowed" handler.
- */
-function methodNotAllowed(req, res, next) {
+function methodNotAllowed(request, _response, next) {
   next({
     status: 405,
-    message: `${req.method} not allowed for ${req.originalUrl}`,
+    message: `${request.method} not allowed for ${request.originalUrl}`,
   });
 }
 

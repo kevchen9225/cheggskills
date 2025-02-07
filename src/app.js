@@ -1,19 +1,19 @@
 if (process.env.USER) require("dotenv").config();
+
 const express = require("express");
 const app = express();
-
-const customersRouter = require("./customers/customers.router");
-const employeesRouter = require("./employees/employees.router");
-const ticketsRouter = require("./tickets/tickets.router");
-
+const moviesRouter = require("./movies/movies.router");
+const theatersRouter = require("./theaters/theaters.router");
+const reviewsRouter = require("./reviews/reviews.router");
 const notFound = require("./errors/notFound");
 const errorHandler = require("./errors/errorHandler");
 
+// TODO: Add your code here
 app.use(express.json());
 
-app.use("/customers", customersRouter);
-app.use("/employees", employeesRouter);
-app.use("/tickets", ticketsRouter);
+app.use("/theaters", theatersRouter);
+app.use("/movies", moviesRouter);
+app.use("/reviews", reviewsRouter);
 
 app.use(notFound);
 app.use(errorHandler);
