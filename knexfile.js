@@ -3,7 +3,7 @@ const path = require("path");
 require("dotenv").config();
 
 const {
-  DATABASE_URL = "postgresql://postgres@localhost/postgres",
+  DATABASE_URL = "postgresql://cheggskill_user:PPPNKat0QZh45lglWWQjfopecK7nW2e8@dpg-cuiouet6l47c73ahve0g-a.oregon-postgres.render.com/cheggskill?ssl=true",
 } = process.env;
 
 module.exports = {
@@ -18,8 +18,8 @@ module.exports = {
       directory: path.join(__dirname, "src", "db", "seeds"),
     },
     ssl: {
-      rejectUnauthorized: false // This will allow connections without requiring SSL certificates to be valid.
-    }
+      rejectUnauthorized: false, // This will allow connections without requiring SSL certificates to be valid.
+    },
   },
 
   production: {
@@ -33,8 +33,8 @@ module.exports = {
       directory: path.join(__dirname, "src", "db", "seeds"),
     },
     ssl: {
-      rejectUnauthorized: false // This will allow connections without requiring SSL certificates to be valid.
-    }
+      rejectUnauthorized: false, // This will allow connections without requiring SSL certificates to be valid.
+    },
   },
 
   test: {
